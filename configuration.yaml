@@ -61,23 +61,23 @@ automation: !include automations.yaml
 
 verisure:
   username: leifmariposa@hotmail.com
-  password: bigoton12
+  password: !secret verisure_password
 
 device_tracker:
   platform: asuswrt
   host: 192.168.2.1
   username: admin
-  password: bigoton11
+  password: !secret asuswrt_password
   protocol: telnet
   interval_seconds: 120
   track_new_devices: no
 
 tradfri:
   host: 192.168.2.101
-  api_key: ODXl9oyZeTOQUUTi
+  api_key: !secret tradfri_api_key
 
 tellduslive:
   public_key: FEHUVEW84RAFR5SP22RABURUPHAFRUNU
-  private_key: ZUXEVEGA9USTAZEWRETHAQUBUR69U6EF
+  private_key: !secret tellduslive_private_key
   token: 266a7d90754861957512378424a3b9680592b1a33
-  token_secret: 9aa6d993f704ec031dfc4ae5b346eb63
+  token_secret: !secret tellduslive_token_secret
