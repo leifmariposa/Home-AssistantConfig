@@ -1,8 +1,38 @@
-alias: Automation 1
-trigger:
-  platform: sun
-  event: sunset
-  offset: '-01:00:00'
-action:
-  service: light.turn_on
+- alias: Lights on one hour before sunset
+  trigger:
+    platform: sun
+    event: sunset
+    offset: '-01:00:00'
+  action:
+    service: light.turn_on
+
+- alias: Lights on thirty minutes before sunset
+  trigger:
+    platform: sun
+    event: sunset
+    offset: '-00:30:00'
+  action:
+    service: switch.turn_on
+    entity_id:
+      - switch.vardagsrum_fonster_1
+      - switch.vardagsrum_fonster_2
+      - switch.vardagsrum_byra
+      - switch.smalampor
+
+
+- alias: Turn off all lights at 23:20
+  trigger:
+    platform: time
+    hours: 23
+    minutes: 20
+    seconds: 0
+  action:
+    - service: light.turn_off
+    - service: switch.turn_off
+      entity_id:
+        - switch.vardagsrum_fonster_1
+        - switch.vardagsrum_fonster_2
+        - switch.vardagsrum_byra
+        - switch.smalampor
+
 
