@@ -1,0 +1,34 @@
+default_view:
+  view: yes
+  icon: mdi:home
+  entities:
+    - group.lights
+    - group.whos_home
+    - group.sensors
+
+lights:
+  name: Lamps
+  entities:
+    - light.livingroom
+    - light.lamp_left_of_tv
+    - light.lamp_right_of_tv
+    - switch.smalampor
+    - switch.vardagsrum_byra
+    - switch.vardagsrum_fonster_1
+    - switch.vardagsrum_fonster_2
+
+whos_home:
+  name: "At home"
+  entities:
+    - device_tracker.alemeisters7edge
+    - device_tracker.4c6641530ec9
+    - device_tracker.jacquelesiphone
+    - device_tracker.samsunggalaxys7edge
+
+sensors:
+  name: Sensors
+  entities:
+    - sensor.kok_temperature
+    - sensor.vardagsrum_temperature
+    - sensor.ute_temperature
+    - sensor.kok_humidity 

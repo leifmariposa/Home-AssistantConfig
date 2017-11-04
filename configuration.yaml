@@ -5,11 +5,13 @@ homeassistant:
   latitude: 55.6
   longitude: 13.3833
   # Impacts weather/sunrise data (altitude above sea level in meters)
-  elevation: 0
+  elevation: 34
   # metric for Metric, imperial for Imperial
   unit_system: metric
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Stockholm
+  # Customization file
+  customize: !include customize.yaml
 
 # Show links to resources in log and frontend
 #introduction:
@@ -32,6 +34,8 @@ http:
 # For more information, please see:
 # https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
 updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
 
 # Discover some devices automatically
 #discovery:
@@ -45,55 +49,23 @@ history:
 # View all events in a logbook
 logbook:
 
+# Enables a map showing the location of tracked devices
+map:
+
 # Track the sun
 sun:
 
 # Weather Prediction
 sensor:
-  platform: yr
+  - platform: yr
 
 # Text to speech
 tts:
-  platform: google
+  - platform: google
 
-#group: !include groups.yaml
+group: !include groups.yaml
 automation: !include automations.yaml
-
-group:
-  default_view:
-    view: yes
-    icon: mdi:home
-    entities:
-      - group.lights
-      - group.whos_home
-      - group.sensors
-
-  lights:
-    name: Lamps
-    entities:
-      - light.livingroom
-      - light.lamp_left_of_tv
-      - light.lamp_right_of_tv
-      - switch.smalampor
-      - switch.vardagsrum_byra
-      - switch.vardagsrum_fonster_1
-      - switch.vardagsrum_fonster_2
-
-  whos_home:
-    name: "At home"
-    entities:
-      - device_tracker.alemeisters7edge
-      - device_tracker.4c6641530ec9
-      - device_tracker.jacquelesiphone
-      - device_tracker.samsunggalaxys7edge
-
-  sensors:
-    name: Sensors
-    entities:
-      - sensor.kok_temperature
-      - sensor.vardagsrum_temperature
-      - sensor.ute_temperature
-      - sensor.kok_humidity
+script: !include scripts.yaml
 
 verisure:
   username: leifmariposa@hotmail.com
@@ -110,7 +82,6 @@ device_tracker:
 
 tradfri:
   host: 192.168.2.96
-  api_key: !secret tradfri_api_key
 
 tellduslive:
   public_key: FEHUVEW84RAFR5SP22RABURUPHAFRUNU
