@@ -109,7 +109,7 @@ device_tracker:
   track_new_devices: no
 
 tradfri:
-  host: 192.168.2.101
+  host: 192.168.2.96
   api_key: !secret tradfri_api_key
 
 tellduslive:
