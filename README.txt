@@ -1,10 +1,10 @@
-Install
+Last updated on 171105 (Home Assitant v0.57.1)
+
+Installation - https://home-assistant.io/docs/installation/hassbian/installation/
 --------------------------------------------------------------------------------
 Download Hasbian from https://github.com/home-assistant
 Use Etcher to flash it
-
-https://home-assistant.io/docs/installation/hassbian/installation/
-
+Boot and wait...
 
 In /home/homeassistant/.homeassistant
 ----------------------------------------
@@ -17,20 +17,15 @@ git checkout -t origin/master
 
 
 
-
-
-
-Upgrading
+Upgrading - https://home-assistant.io/docs/installation/hassbian/upgrading/
 --------------------------------------------------------------------------------
-
-https://home-assistant.io/docs/installation/hassbian/upgrading/
-
 Upgrading Hassbian
 
 HASSbian is based on Raspbian and uses the same repositories. Any changes to Raspbian will be reflected in HASSbian. To update and upgrade system packages and installed software (excluding Home Assistant) do the following. Log in as the pi account and execute the following commands:
 
 $ sudo apt-get update
 $ sudo apt-get -y upgrade
+
 Updating Home Assistant
 
 You can also use hassbian-config to automate the process by running sudo hassbian-config upgrade home-assistant
