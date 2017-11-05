@@ -1,4 +1,5 @@
-- alias: Lights on one hour before sunset
+- id: lights_on_one_hour_before_sunset
+  alias: Lights on one hour before sunset
   trigger:
     platform: sun
     event: sunset
@@ -6,7 +7,8 @@
   action:
     service: light.turn_on
 
-- alias: Lights on thirty minutes before sunset
+- id: lights_on_thirty_minutes_before_sunset
+  alias: Lights on thirty minutes before sunset
   trigger:
     platform: sun
     event: sunset
@@ -19,8 +21,8 @@
       - switch.vardagsrum_byra
       - switch.smalampor
 
-
-- alias: Turn off all lights at 23:20
+- id: lights_off
+  alias: Turn off all lights at 23:20
   trigger:
     platform: time
     hours: 23
@@ -34,5 +36,30 @@
         - switch.vardagsrum_fonster_2
         - switch.vardagsrum_byra
         - switch.smalampor
+
+- id: lamp_brightness_and_color
+  alias: Change brightness and color of lamps in livingroom
+  trigger:
+    - platform: state
+      entity_id: input_number.light_brightness
+    - platform: state
+      entity_id: input_number.light_color
+  action:
+    - service: light.turn_on
+      data_template:
+        entity_id: light.lamp_left_of_tv
+        brightness: '{{ states.input_number.light_brightness.state | int }}'
+    - service: light.turn_on
+      data_template:
+        entity_id: light.lamp_right_of_tv
+        brightness: '{{ states.input_number.light_brightness.state | int }}'
+    - service: light.turn_on
+      data_template:
+        entity_id: light.lamp_left_of_tv
+        color_temp: '{{ states.input_number.light_color.state | int }}'
+    - service: light.turn_on
+      data_template:
+        entity_id: light.lamp_right_of_tv
+        color_temp: '{{ states.input_number.light_color.state | int }}'
 
 

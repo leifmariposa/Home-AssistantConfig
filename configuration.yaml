@@ -58,6 +58,22 @@ sun:
 # Weather Prediction
 sensor:
   - platform: yr
+    name: Weather
+    forecast: 24
+    monitored_conditions:
+      - temperature
+      - symbol
+      - precipitation
+      - windSpeed
+      - pressure
+      - windDirection
+      - humidity
+      - fog
+      - cloudiness
+      - lowClouds
+      - mediumClouds
+      - highClouds
+      - dewpointTemperature
 
 # Text to speech
 tts:
@@ -83,8 +99,26 @@ device_tracker:
 tradfri:
   host: 192.168.2.96
 
-tellduslive:
-  public_key: FEHUVEW84RAFR5SP22RABURUPHAFRUNU
-  private_key: !secret tellduslive_private_key
-  token: 266a7d90754861957512378424a3b9680592b1a33
-  token_secret: !secret tellduslive_token_secret
+#tellduslive:
+#  public_key: FEHUVEW84RAFR5SP22RABURUPHAFRUNU
+#  private_key: !secret tellduslive_private_key
+#  token: 266a7d90754861957512378424a3b9680592b1a33
+#  token_secret: !secret tellduslive_token_secret
+
+input_number:
+  light_brightness:
+    name: Brightness
+    icon: mdi:brightness-5
+    initial: 128
+    min: 0
+    max: 255
+    step: 10
+  light_color:
+    name: Color
+    icon: mdi:invert-colors
+    initial: 300
+    min: 154
+    max: 500
+    step: 10
+
+#livingroom_lights: !include livingroom_lights.yaml

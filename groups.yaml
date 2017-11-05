@@ -6,6 +6,28 @@ default_view:
     - group.whos_home
     - group.sensors
 
+weather_view:
+  view: yes
+  icon: mdi:weather-partlycloudy
+  entities:
+    - sun.sun
+    - group.weather
+
+livingroom:
+  view: yes
+  icon: mdi:television-classic
+  entities:
+    - group.livingroom_lights
+
+livingroom_lights:
+  name: Livingroom Lights
+  entities:
+    - light.livingroom
+    - light.lamp_left_of_tv
+    - light.lamp_right_of_tv
+    - input_number.light_brightness
+    - input_number.light_color
+
 lights:
   name: Lamps
   entities:
@@ -32,3 +54,22 @@ sensors:
     - sensor.vardagsrum_temperature
     - sensor.ute_temperature
     - sensor.kok_humidity 
+
+weather:
+  name: Weather
+  entities:
+    - sensor.yr_symbol
+    - sensor.weather_cloudiness
+    - sensor.weather_dewpoint_temperature
+    - sensor.weather_fog
+    - sensor.weather_high_clouds
+    - sensor.weather_humidity
+    - sensor.weather_low_clouds
+    - sensor.weather_medium_clouds
+    - sensor.weather_precipitation
+    - sensor.weather_pressure
+    - sensor.weather_symbol
+    - sensor.weather_temperature
+    - ensor.weather_wind_direction
+    - sensor.weather_wind_speed
+
