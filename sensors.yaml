@@ -1,0 +1,34 @@
+- platform: yr
+  name: Weather
+  forecast: 24
+  monitored_conditions:
+    - temperature
+    - symbol
+    - precipitation
+    - windSpeed
+    - pressure
+    - windDirection
+    - humidity
+    - fog
+    - cloudiness
+    - lowClouds
+    - mediumClouds
+    - highClouds
+    - dewpointTemperature
+
+- platform: moon
+
+- platform: template
+  sensors:
+    solar_angle:
+      friendly_name: "Sun angle"
+      unit_of_measurement: 'degrees'
+      value_template: "{{ states.sun.sun.attributes.elevation }}"
+
+    sunrise:
+      friendly_name: "Sunrise"
+      value_template: '{{ as_timestamp(states.sun.sun.attributes.next_rising)  | timestamp_custom("%H:%M") }}'
+
+    sunset:
+      friendly_name: "Sunset"
+      value_template: '{{ as_timestamp(states.sun.sun.attributes.next_setting)  | timestamp_custom("%H:%M") }}'

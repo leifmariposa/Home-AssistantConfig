@@ -1,9 +1,22 @@
 default_view:
   view: yes
-  icon: mdi:home
+#  icon: mdi:home
+  icon: mdi:lamp
   entities:
+    - group.livingroom_lights
     - group.lights
+
+people_view:
+  view: yes
+#  icon: mdi:television-classic
+  icon: mdi:account-multiple
+  entities:
     - group.whos_home
+
+sensors_view:
+  view: yes
+  icon: mdi:oil-temperature
+  entities:
     - group.sensors
 
 weather_view:
@@ -12,12 +25,9 @@ weather_view:
   entities:
     - sun.sun
     - group.weather
-
-livingroom:
-  view: yes
-  icon: mdi:television-classic
-  entities:
-    - group.livingroom_lights
+    - group.sun
+    - group.moon
+    - group.clouds
 
 livingroom_lights:
   name: Livingroom Lights
@@ -27,17 +37,10 @@ livingroom_lights:
     - light.lamp_right_of_tv
     - input_number.light_brightness
     - input_number.light_color
-
-lights:
-  name: Lamps
-  entities:
-    - light.livingroom
-    - light.lamp_left_of_tv
-    - light.lamp_right_of_tv
-    - switch.smalampor
-    - switch.vardagsrum_byra
-    - switch.vardagsrum_fonster_1
-    - switch.vardagsrum_fonster_2
+#    - switch.smalampor
+#    - switch.vardagsrum_byra
+#    - switch.vardagsrum_fonster_1
+#    - switch.vardagsrum_fonster_2
 
 whos_home:
   name: "At home"
@@ -58,18 +61,35 @@ sensors:
 weather:
   name: Weather
   entities:
-    - sensor.yr_symbol
-    - sensor.weather_cloudiness
+#    - sensor.yr_symbol
+#    - sensor.yr_condition
+#    - sensor.weather_symbol
+    - sensor.weather_temperature
     - sensor.weather_dewpoint_temperature
-    - sensor.weather_fog
-    - sensor.weather_high_clouds
     - sensor.weather_humidity
-    - sensor.weather_low_clouds
-    - sensor.weather_medium_clouds
     - sensor.weather_precipitation
     - sensor.weather_pressure
-    - sensor.weather_symbol
-    - sensor.weather_temperature
-    - ensor.weather_wind_direction
+    - sensor.weather_wind_direction
     - sensor.weather_wind_speed
 
+clouds:
+  name: Clouds
+  entities:
+    - sensor.weather_cloudiness
+    - sensor.weather_low_clouds
+    - sensor.weather_medium_clouds
+    - sensor.weather_high_clouds
+    - sensor.weather_fog
+
+sun:
+  name: Sun
+  entities:
+    - sun.sun
+    - sensor.solar_angle
+    - sensor.sunrise
+    - sensor.sunset
+
+moon:
+  name: Moon
+  entities:
+    - sensor.moon

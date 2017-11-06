@@ -55,30 +55,11 @@ map:
 # Track the sun
 sun:
 
-# Weather Prediction
-sensor:
-  - platform: yr
-    name: Weather
-    forecast: 24
-    monitored_conditions:
-      - temperature
-      - symbol
-      - precipitation
-      - windSpeed
-      - pressure
-      - windDirection
-      - humidity
-      - fog
-      - cloudiness
-      - lowClouds
-      - mediumClouds
-      - highClouds
-      - dewpointTemperature
-
 # Text to speech
 tts:
   - platform: google
 
+sensor: !include sensors.yaml
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
