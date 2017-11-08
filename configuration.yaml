@@ -24,7 +24,7 @@ config:
 
 http:
   # Uncomment this to add a password (recommended!)
-  # api_password: PASSWORD
+  api_password: Bigoton11
   # Uncomment this if you are using SSL or running in Docker etc
   # base_url: example.duckdns.org:8123
 
@@ -86,6 +86,17 @@ tradfri:
 #  token: 266a7d90754861957512378424a3b9680592b1a33
 #  token_secret: !secret tellduslive_token_secret
 
+input_boolean:
+  light_auto_on:
+    name: Turn on lights automatically
+    initial: on
+    icon: mdi:flash-auto
+
+  light_auto_off:
+    name: Turn off lights automatically
+    initial: on
+    icon: mdi:flash-off
+
 input_number:
   light_brightness:
     name: Brightness
@@ -94,6 +105,7 @@ input_number:
     min: 0
     max: 255
     step: 10
+
   light_color:
     name: Color
     icon: mdi:invert-colors
@@ -102,4 +114,25 @@ input_number:
     max: 500
     step: 10
 
-#livingroom_lights: !include livingroom_lights.yaml
+  light_auto_on_time:
+    name: Minutes before sunset
+    icon: mdi:timer
+    unit_of_measurement: minutes
+    initial: 60
+    min: 0
+    max: 120
+    step: 10
+
+  light_auto_off_hour:
+    name: Hour
+    icon: mdi:timer
+    initial: 23
+    min: 0
+    max: 24
+
+  light_auto_off_minutes:
+    name: Minutes
+    icon: mdi:timer
+    initial: 20
+    min: 0
+    max: 59

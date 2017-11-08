@@ -4,7 +4,9 @@ default_view:
   icon: mdi:lamp
   entities:
     - group.livingroom_lights
-    - group.lights
+    - group.livingroom_lights2
+    - group.livingroom_lights_timer
+#    - group.lights
 
 people_view:
   view: yes
@@ -30,7 +32,8 @@ weather_view:
     - group.clouds
 
 livingroom_lights:
-  name: Livingroom Lights
+  name: Livingroom lights
+  control: hidden
   entities:
     - light.livingroom
     - light.lamp_left_of_tv
@@ -41,6 +44,23 @@ livingroom_lights:
 #    - switch.vardagsrum_byra
 #    - switch.vardagsrum_fonster_1
 #    - switch.vardagsrum_fonster_2
+
+livingroom_lights2:
+  name: Livingroom Lights
+  entities:
+    - switch.lampa_vardagsrum
+
+livingroom_lights_timer:
+  name: Automation
+  control: hidden
+  entities:
+    - input_boolean.light_auto_on
+    - input_number.light_auto_on_time
+    - sensor.light_auto_on_time
+    - input_boolean.light_auto_off
+    - input_number.light_auto_off_hour
+    - input_number.light_auto_off_minutes
+    - sensor.light_auto_off_time
 
 whos_home:
   name: "At home"

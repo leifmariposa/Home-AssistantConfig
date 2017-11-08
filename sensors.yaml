@@ -32,3 +32,11 @@
     sunset:
       friendly_name: "Sunset"
       value_template: '{{ as_timestamp(states.sun.sun.attributes.next_setting)  | timestamp_custom("%H:%M") }}'
+
+    light_auto_on_time:
+      friendly_name: 'Lights will turn on at'
+      value_template: '{{ (as_timestamp(states.sun.sun.attributes.next_setting) - (states("input_number.light_auto_on_time") | int)  * 60)  | timestamp_custom("%H:%M") }}'
+
+    light_auto_off_time:
+      friendly_name: 'Lights will turn off at'
+      value_template: '{{ "%0.02d:%0.02d" | format(states("input_number.light_auto_off_hour") | int, states("input_number.light_auto_off_minutes") | int) }}'

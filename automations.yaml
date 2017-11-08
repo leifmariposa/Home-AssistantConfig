@@ -1,33 +1,28 @@
-- id: lights_on_one_hour_before_sunset
-  alias: Lights on one hour before sunset
+- id: lights_auto_on
+  alias: lights_auto_on
   trigger:
     platform: sun
     event: sunset
     offset: '-01:00:00'
+  condition:
+    - condition: state
+      entity_id: input_boolean.light_auto_on
+      state: 'on'
   action:
     service: light.turn_on
 
-- id: lights_on_thirty_minutes_before_sunset
-  alias: Lights on thirty minutes before sunset
-  trigger:
-    platform: sun
-    event: sunset
-    offset: '-00:30:00'
-  action:
-    service: switch.turn_on
-    entity_id:
-      - switch.vardagsrum_fonster_1
-      - switch.vardagsrum_fonster_2
-      - switch.vardagsrum_byra
-      - switch.smalampor
-
-- id: lights_off
-  alias: Turn off all lights at 23:20
+- id: lights_auto_on
+  alias: lights_auto_on
   trigger:
     platform: time
-    hours: 23
-    minutes: 20
+    minutes: '/1'
     seconds: 0
+  condition:
+    - condition: state
+      entity_id: input_boolean.light_auto_off
+      state: 'on'
+    - condition: template
+      value_template: '{{ now().strftime("%H:%M") == states.sensor.light_auto_off_time.state }}'
   action:
     - service: light.turn_off
     - service: switch.turn_off
