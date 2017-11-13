@@ -38,3 +38,48 @@ $ source /srv/homeassistant/bin/activate
 $ pip3 install --upgrade homeassistant
 $ exit
 $ sudo systemctl start home-assistant@homeassistant.service
+
+
+
+Glances
+--------------------------------------------------------------------------------
+sudo apt-get install glances
+
+sudo nano /etc/systemd/system/glances.service
+[Unit]
+Description=Glances
+
+[Service]
+ExecStart=/usr/bin/glances -w
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
+
+
+sudo systemctl enable glances.service
+sudo systemctl start glances.service
+
+
+http://192.168.2.108:61208/
+
+sensors.yaml
+
+- platform: glances
+  host: 127.0.0.1
+  resources:
+    - 'disk_use_percent'
+    - 'disk_use'
+    - 'disk_free'
+    - 'memory_use_percent'
+    - 'memory_use'
+    - 'memory_free'
+    - 'swap_use_percent'
+    - 'swap_use'
+    - 'swap_free'
+    - 'processor_load'
+    - 'process_running'
+    - 'process_total'
+    - 'process_thread'
+    - 'process_sleeping'
+    - 'cpu_temp'

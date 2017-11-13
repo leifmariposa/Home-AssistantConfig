@@ -18,7 +18,7 @@
 
 - platform: darksky
   name: 'Dark Sky'
-  api_key: 49bfd1035cf28c5f7b230fe2e9fdf75b
+  api_key: !secret dark_sky_api_key
   monitored_conditions:
     - summary
     - icon
@@ -44,7 +44,9 @@
     - temperature_min
     - apparent_temperature_max
     - apparent_temperature_min
-    - precip_intensity_max  
+    - precip_intensity_max
+  update_interval:
+    minutes: 5
 
 - platform: moon
 
@@ -70,3 +72,22 @@
     light_auto_off_time:
       friendly_name: 'Lights will turn off at'
       value_template: '{{ "%0.02d:%0.02d" | format(states("input_number.light_auto_off_hour") | int, states("input_number.light_auto_off_minutes") | int) }}'
+
+- platform: glances
+  host: 127.0.0.1
+  resources:
+    - 'disk_use_percent'
+    - 'disk_use'
+    - 'disk_free'
+    - 'memory_use_percent'
+    - 'memory_use'
+    - 'memory_free'
+    - 'swap_use_percent'
+    - 'swap_use'
+    - 'swap_free'
+    - 'processor_load'
+    - 'process_running'
+    - 'process_total'
+    - 'process_thread'
+    - 'process_sleeping'
+    - 'cpu_temp'
