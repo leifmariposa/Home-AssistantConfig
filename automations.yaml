@@ -1,3 +1,12 @@
+- id: 'Auto Renew SSL Cert'
+  alias: 'Auto Renew SSL Cert'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.ssl_cert_expiry
+    below: 29
+  action:
+    service: shell_command.renew_ssl
+
 - id: lights_auto_on
   alias: lights_auto_on
   trigger:

@@ -91,3 +91,9 @@
     - 'process_thread'
     - 'process_sleeping'
     - 'cpu_temp'
+
+- platform: command_line
+  name: SSL cert expiry
+  unit_of_measurement: days
+  scan_interval: 10800
+  command: "ssl-cert-check -b -c /etc/letsencrypt/live/leifmariposa.asuscomm.com/cert.pem | awk '{ print $NF }'"

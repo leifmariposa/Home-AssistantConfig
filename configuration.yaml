@@ -23,10 +23,10 @@ frontend:
 config:
 
 http:
-  # Uncomment this to add a password (recommended!)
-  api_password: Bigoton11
-  # Uncomment this if you are using SSL or running in Docker etc
-  # base_url: example.duckdns.org:8123
+  api_password: !secret api_password
+  ssl_certificate: /etc/letsencrypt/live/leifmariposa.asuscomm.com/fullchain.pem
+  ssl_key: /etc/letsencrypt/live/leifmariposa.asuscomm.com/privkey.pem
+  base_url: leifmariposa.asuscomm.com
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -42,6 +42,12 @@ updater:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
+#  intents:
+#    ShoppingListAddItem:
+#      - Add {item} to my shopping list
+
+shopping_list:
+
 
 # Enables support for tracking state changes over time.
 history:
@@ -92,6 +98,9 @@ tradfri:
 #  private_key: !secret tellduslive_private_key
 #  token: 266a7d90754861957512378424a3b9680592b1a33
 #  token_secret: !secret tellduslive_token_secret
+
+shell_command:
+  renew_ssl: ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01
 
 input_boolean:
   light_auto_on:

@@ -47,6 +47,17 @@ glances_view:
   entities:
     - group.glances
 
+misc_view:
+  view: yes
+  icon: mdi:all-inclusive
+  entities:
+    - group.misc
+
+misc:
+  name: SSL Cert Expiry
+  entities:
+    - sensor.ssl_cert_expiry
+
 glances:
   name: Glances
   entities:

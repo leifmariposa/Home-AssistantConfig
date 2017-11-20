@@ -41,6 +41,109 @@ $ sudo systemctl start home-assistant@homeassistant.service
 
 
 
+Remote Access with TLS/SSL via Let's Encrypt
+--------------------------------------------------------------------------------
+https://home-assistant.io/docs/ecosystem/certificates/lets_encrypt/
+
+1. SET UP PORT FORWARDING WITHOUT TLS/SSL AND TEST CONNECTION
+   Service name - ha_test
+   Port Range - 8123
+   Local IP - YOUR-HA-IP
+   Local Port - 8123
+   Protocol - Both
+
+2. Test
+   http://<My IP>:8123
+
+3. Test with a DNS service
+   http://leifmariposa.asuscomm.com:8123
+
+4. OBTAIN A TLS/SSL CERTIFICATE FROM LET’S ENCRYPT
+   First set up port forwardning for http
+
+   Service name - ha_letsencrypt
+   Port Range - 80
+   Local IP - YOUR-HA-IP
+   Local Port - 80
+   Protocol - Both
+
+5. sudo su -s /bin/bash hass
+   cd
+   mkdir certbot
+   cd certbot/
+   wget https://dl.eff.org/certbot-auto
+   chmod a+x certbot-auto
+   exit
+
+   <as pi user>
+   cd /home/homeassistant/certbot
+   ./certbot-auto certonly --standalone --preferred-challenges http-01 --email your@email.address -d examplehome.duckdns.org
+   ./certbot-auto certonly --standalone --preferred-challenges http-01 --email leifmariposa@hotmail.com -d leifmariposa.asuscomm.com
+
+   sudo chmod 755 /etc/letsencrypt/live/
+   sudo chmod 755 /etc/letsencrypt/archive/
+
+6. CHECK THE INCOMING CONNECTION
+   Service name - ha_ssl
+   Port Range - 443
+   Local IP - YOUR-HA-IP
+   Local Port - 8123
+   Protocol - Both
+
+7. configuration.yaml
+http:
+  api_password: !secret api_password
+  ssl_certificate: /etc/letsencrypt/live/leifmariposa.asuscomm.com/fullchain.pem
+  ssl_key: /etc/letsencrypt/live/leifmariposa.asuscomm.com/privkey.pem
+  base_url: leifmariposa.asuscomm.com
+
+8. Test
+   https://leifmariposa.asuscomm.com
+
+9. CLEAN UP PORT FORWARDS
+   Service name - ha_test
+
+10. SET UP A SENSOR TO MONITOR THE EXPIRY DATE OF THE CERTIFICATE
+    sudo apt-get update
+    sudo apt-get install ssl-cert-check
+
+<sensor.yaml>
+- platform: command_line
+  name: SSL cert expiry
+  unit_of_measurement: days
+  scan_interval: 10800
+  command: "ssl-cert-check -b -c /etc/letsencrypt/live/leifmariposa.asuscomm.com/cert.pem | awk '{ print $NF }'"
+
+<groups.yaml>
+misc_view:
+  view: yes
+  icon: mdi:all-inclusive
+  entities:
+    - group.misc
+
+misc:
+  name: SSL Cert Expiry
+  entities:
+    - sensor.ssl_cert_expiry
+
+11. SET UP AN AUTOMATIC RENEWAL OF THE TLS/SSL CERTIFICATE
+<configuration.yaml>
+shell_command:
+  renew_ssl: ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01
+
+<automations.yaml>
+- alias: 'Auto Renew SSL Cert'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.ssl_cert_expiry
+    below: 29
+  action:
+    service: shell_command.renew_ssl
+
+
+
+
+
 Glances
 --------------------------------------------------------------------------------
 sudo apt-get install glances
