@@ -64,11 +64,11 @@ glances:
     - sensor.glances_cpu_load
 #    - sensor.glances_cpu_temp
 #    - sensor.glances_disk_free
-#    - sensor.glances_disk_used
-    - sensor.glances_disk_used_2
+    - sensor.glances_disk_used
+#    - sensor.glances_disk_used_2
 #    - sensor.glances_ram_free
-#    - sensor.glances_ram_used
-    - sensor.glances_ram_used_2
+    - sensor.glances_ram_used
+#    - sensor.glances_ram_used_2
 #    - sensor.glances_running
 #    - sensor.glances_sleeping
 #    - sensor.glances_swap_free
@@ -165,9 +165,11 @@ sensors:
   name: Sensors
   entities:
     - sensor.kok_temperature
-    - sensor.vardagsrum_temperature
-    - sensor.ute_temperature
     - sensor.kok_humidity
+    - sensor.vardagsrum_temperature
+    - sensor.vardagsrum_humidity
+    - sensor.ute_temperature
+    - alarm_control_panel.mostigen1_alarm
 
 weather:
   name: Weather

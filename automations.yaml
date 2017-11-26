@@ -1,3 +1,25 @@
+- id: 'Set theme at startup'
+  alias: 'Set theme at startup'
+  initial_state: 'on'
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    service: frontend.set_theme
+    data:
+      name: dark_theme
+
+- id: 'New HA version'
+  alias: New HA version
+  trigger:
+    - platform: state
+      entity_id: updater.updater
+  action:
+    service: notify.gmail
+    data:
+      title: 'New HA version available'
+      message: 'There is a new Home Assistant {{ states.updater.updater.state }} release available.'
+
 - id: 'Auto Renew SSL Cert'
   alias: 'Auto Renew SSL Cert'
   trigger:
