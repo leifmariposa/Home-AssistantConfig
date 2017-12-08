@@ -1,50 +1,95 @@
-- platform: yr
-  name: Weather
-  forecast: 24
-  monitored_conditions:
-    - temperature
-    - symbol
-    - precipitation
-    - windSpeed
-    - pressure
-    - windDirection
-    - humidity
-    - fog
-    - cloudiness
-    - lowClouds
-    - mediumClouds
-    - highClouds
-    - dewpointTemperature
+#- platform: yweather
+#  name: Weather Today
+#  monitored_conditions:
+#    - weather
+#    - weather_current
+#    - temp_min
+#    - temp_max
+#    - wind_speed
+#    - pressure
+#    - visibility
+#    - humidity
+#    - temperature
 
-- platform: darksky
-  name: 'Dark Sky'
-  api_key: !secret dark_sky_api_key
+- platform: yweather
+  name: yw_today
+  woeid: 890563
   monitored_conditions:
-    - summary
-    - icon
-    - nearest_storm_distance
-    - nearest_storm_bearing
-    - precip_type
-    - precip_intensity
-    - precip_probability
+    - weather
+    - weather_current
     - temperature
-    - apparent_temperature
-    - dew_point
-    - wind_speed
-    - wind_bearing
-    - cloud_cover
-    - humidity
-    - pressure
-    - visibility
-    - ozone
-    - minutely_summary
-    - hourly_summary
-    - daily_summary
-    - temperature_max
-    - temperature_min
-    - apparent_temperature_max
-    - apparent_temperature_min
-    - precip_intensity_max
+- platform: yweather
+  forecast: 1
+  name: yw_day1
+  woeid: 890563
+  monitored_conditions:
+    - weather
+    - temp_min
+    - temp_max
+- platform: yweather
+  forecast: 2
+  name: yw_day2
+  woeid: 890563
+  monitored_conditions:
+    - weather
+    - temp_min
+    - temp_max
+- platform: yweather
+  forecast: 3
+  name: yw_day3
+  woeid: 890563
+  monitored_conditions:
+    - weather
+    - temp_min
+    - temp_max
+
+#- platform: yr
+#  name: Weather
+#  forecast: 24
+#  monitored_conditions:
+#    - temperature
+#    - symbol
+#    - precipitation
+#    - windSpeed
+#    - pressure
+#    - windDirection
+#    - humidity
+#    - fog
+#    - cloudiness
+#    - lowClouds
+#    - mediumClouds
+#    - highClouds
+#    - dewpointTemperature
+
+#- platform: darksky
+#  name: 'Dark Sky'
+#  api_key: !secret dark_sky_api_key
+#  monitored_conditions:
+#    - summary
+#    - icon
+#    - nearest_storm_distance
+#    - nearest_storm_bearing
+#    - precip_type
+#    - precip_intensity
+#    - precip_probability
+#    - temperature
+#    - apparent_temperature
+#    - dew_point
+#    - wind_speed
+#    - wind_bearing
+#    - cloud_cover
+#    - humidity
+#    - pressure
+#    - visibility
+#    - ozone
+#    - minutely_summary
+#    - hourly_summary
+#    - daily_summary
+#    - temperature_max
+#    - temperature_min
+#    - apparent_temperature_max
+#    - apparent_temperature_min
+#    - precip_intensity_max
   update_interval:
     minutes: 5
 
@@ -73,24 +118,33 @@
       friendly_name: 'Lights will turn off at'
       value_template: '{{ "%0.02d:%0.02d" | format(states("input_number.light_auto_off_hour") | int, states("input_number.light_auto_off_minutes") | int) }}'
 
-- platform: glances
-  host: 127.0.0.1
+#- platform: glances
+#  host: 127.0.0.1
+#  resources:
+#    - 'disk_use_percent'
+#    - 'disk_use'
+#    - 'disk_free'
+#    - 'memory_use_percent'
+#    - 'memory_use'
+#    - 'memory_free'
+#    - 'swap_use_percent'
+#    - 'swap_use'
+#    - 'swap_free'
+#    - 'processor_load'
+#    - 'process_running'
+#    - 'process_total'
+#    - 'process_thread'
+#    - 'process_sleeping'
+#    - 'cpu_temp'
+
+- platform: systemmonitor
   resources:
-    - 'disk_use_percent'
-    - 'disk_use'
-    - 'disk_free'
-    - 'memory_use_percent'
-    - 'memory_use'
-    - 'memory_free'
-    - 'swap_use_percent'
-    - 'swap_use'
-    - 'swap_free'
-    - 'processor_load'
-    - 'process_running'
-    - 'process_total'
-    - 'process_thread'
-    - 'process_sleeping'
-    - 'cpu_temp'
+    - type: disk_use_percent
+      arg: /
+    - type: memory_use_percent
+    #- type: load_15m
+    - type: processor_use
+    - type: since_last_boot
 
 - platform: command_line
   name: SSL cert expiry

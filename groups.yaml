@@ -1,12 +1,26 @@
+#
+# Views
+#
+
 default_view:
+#summary_view:
+  view: yes
+  icon: mdi:table-of-contents
+  entities:
+    - group.summary
+    - group.control
+    - group.whos_home
+#    - group.Yahoo_td
+
+lights_view:
   view: yes
 #  icon: mdi:home
   icon: mdi:lamp
   entities:
-    - group.livingroom_lights
+    - group.livingroom_lights1
     - group.livingroom_lights2
+    - group.livingroom_lights3
     - group.livingroom_lights_timer
-#    - group.lights
 
 people_view:
   view: yes
@@ -25,49 +39,113 @@ weather_view:
   view: yes
   icon: mdi:weather-partlycloudy
   entities:
-    - sun.sun
-    - group.weather
-    - group.sun
-    - group.moon
-    - group.clouds
+    - group.weather_today
+    - group.weather_day1
+    - group.weather_day2
+    - group.weather_day3
 
-dark_sky_view:
-  view: yes
-  icon: mdi:weather-cloudy
+weather_today:
+  name: Today
   entities:
-    - group.dark_sky_summary
-    - group.dark_sky_temp
-    - group.dark_sky_wind
-    - group.dark_sky_precipitation
-    - group.dark_sky_misc
+    - sensor.yw_today_condition
+    - sensor.yw_today_current
+    - sensor.yw_today_temperature
 
-glances_view:
+weather_day1:
+  name: Tomorrow
+  entities:
+    - sensor.yw_day1_condition
+    - sensor.yw_day1_temperature_min
+    - sensor.yw_day1_temperature_max
+
+weather_day2:
+  name: 2 days from now
+  entities:
+    - sensor.yw_day2_condition
+    - sensor.yw_day2_temperature_min
+    - sensor.yw_day2_temperature_max
+
+weather_day3:
+  name: 3 days from now
+  entities:
+    - sensor.yw_day3_condition
+    - sensor.yw_day3_temperature_min
+    - sensor.yw_day3_temperature_max
+
+#weather_view:
+#  view: yes
+#  icon: mdi:weather-partlycloudy
+#  entities:
+#    - sun.sun
+#    - group.weather
+#    - group.sun
+#    - group.moon
+#    - group.clouds
+
+#dark_sky_view:
+#  view: yes
+#  icon: mdi:weather-cloudy
+#  entities:
+#    - group.dark_sky_summary
+#    - group.dark_sky_temp
+#    - group.dark_sky_wind
+#    - group.dark_sky_precipitation
+#    - group.dark_sky_misc
+
+system_monitor_view:
   view: yes
   icon: mdi:speedometer
   entities:
-    - group.glances
+    - group.system_monitor
+
+aircontitioner_view:
+  view: yes
+  icon: mdi:fan
+  entities:
+#    - group.airconditioner
+    - group.volume
 
 misc_view:
   view: yes
   icon: mdi:all-inclusive
   entities:
     - group.misc
+    - group.scripts
+
+
+#
+# Groups
+#
+
+summary:
+  name: Summary
+  entities:
+    - light.livingroom
+#    - sensor.weather_temperature
+    - sensor.kok_temperature
+    - sensor.vardagsrum_temperature
+    - sensor.ute_temperature
+    - alarm_control_panel.mostigen1_alarm
 
 misc:
   name: SSL Cert Expiry
   entities:
     - sensor.ssl_cert_expiry
 
-glances:
-  name: Glances
+system_monitor:
+  name: System Monitor
   entities:
-    - sensor.glances_cpu_load
+    - sensor.cpu_used
+    - sensor.disk_used_
+    - sensor.ram_used
+    - sensor.since_last_boot
+    #- sensor.glances_cpu_load
 #    - sensor.glances_cpu_temp
 #    - sensor.glances_disk_free
-    - sensor.glances_disk_used
+    #- sensor.glances_disk_used
 #    - sensor.glances_disk_used_2
 #    - sensor.glances_ram_free
-    - sensor.glances_ram_used
+    #- sensor.glances_ram_used
 #    - sensor.glances_ram_used_2
 #    - sensor.glances_running
 #    - sensor.glances_sleeping
@@ -122,7 +200,7 @@ dark_sky_misc:
     - sensor.dark_sky_pressure
     - sensor.dark_sky_visibility
 
-livingroom_lights:
+livingroom_lights1:
   name: Livingroom lights
   control: hidden
   entities:
@@ -131,15 +209,20 @@ livingroom_lights:
     - light.lamp_right_of_tv
     - input_number.light_brightness
     - input_number.light_color
-#    - switch.smalampor
-#    - switch.vardagsrum_byra
-#    - switch.vardagsrum_fonster_1
-#    - switch.vardagsrum_fonster_2
 
 livingroom_lights2:
   name: Livingroom Lights
   entities:
     - switch.lampa_vardagsrum
+
+livingroom_lights3:
+  name: Livingroom lights
+  control: hidden
+  entities:
+    - switch.smalampor
+    - switch.vardagsrum_byra
+    - switch.vardagsrum_fonster_1
+    - switch.vardagsrum_fonster_2
 
 livingroom_lights_timer:
   name: Automation
@@ -166,33 +249,34 @@ sensors:
   entities:
     - sensor.kok_temperature
     - sensor.kok_humidity
+    - sensor.kok_temperature_2
     - sensor.vardagsrum_temperature
     - sensor.vardagsrum_humidity
     - sensor.ute_temperature
     - alarm_control_panel.mostigen1_alarm
 
-weather:
-  name: Weather
-  entities:
-#    - sensor.yr_symbol
-#    - sensor.yr_condition
-#    - sensor.weather_symbol
-    - sensor.weather_temperature
-    - sensor.weather_dewpoint_temperature
-    - sensor.weather_humidity
-    - sensor.weather_precipitation
-    - sensor.weather_pressure
-    - sensor.weather_wind_direction
-    - sensor.weather_wind_speed
+#weather:
+#  name: Weather
+#  entities:
+##    - sensor.yr_symbol
+##    - sensor.yr_condition
+##    - sensor.weather_symbol
+#    - sensor.weather_temperature
+#    - sensor.weather_dewpoint_temperature
+#    - sensor.weather_humidity
+#    - sensor.weather_precipitation
+#    - sensor.weather_pressure
+#    - sensor.weather_wind_direction
+#    - sensor.weather_wind_speed
 
-clouds:
-  name: Clouds
-  entities:
-    - sensor.weather_cloudiness
-    - sensor.weather_low_clouds
-    - sensor.weather_medium_clouds
-    - sensor.weather_high_clouds
-    - sensor.weather_fog
+#clouds:
+#  name: Clouds
+#  entities:
+#    - sensor.weather_cloudiness
+#    - sensor.weather_low_clouds
+#    - sensor.weather_medium_clouds
+#    - sensor.weather_high_clouds
+#    - sensor.weather_fog
 
 sun:
   name: Sun
@@ -206,3 +290,39 @@ moon:
   name: Moon
   entities:
     - sensor.moon
+
+scripts:
+  name: Script
+  control: hidden
+  entities:
+    - script.reload_core
+    - script.reload_automation
+    - script.reload_groups
+    - script.reload_themes
+    - script.restart
+
+control:
+  name: Control
+  control: hidden
+  entities:
+    - script.all_lights_on
+    - script.all_lights_off
+
+#airconditioner:
+#  name: Airconditioner
+#  control: hidden
+#  entities:
+#    - script.turn_aircond_off
+#    - script.set_aircond_heating_21
+#    - script.set_aircond_heating_22
+#    - script.set_aircond_heating_23
+#    - script.set_aircond_heating_24
+#    - script.set_aircond_heating_25
+#    - script.set_aircond_heating_26
+
+volume:
+  name: Volume
+  control: hidden
+  entities:
+    - script.set_volume_up
+    - script.set_volume_down

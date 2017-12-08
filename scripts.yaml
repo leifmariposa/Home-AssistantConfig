@@ -1,6 +1,102 @@
-reload:
+reload_automation:
   sequence:
     - service: automation.reload
+
+reload_core:
+  sequence:
     - service: homeassistant.reload_core_config
+
+reload_themes:
+  sequence:
     - service: frontend.reload_themes
 
+reload_groups:
+  sequence:
+    - service: group.reload
+
+restart:
+  sequence:
+    - service: homeassistant.restart
+
+all_lights_on:
+  sequence:
+    - service: light.turn_on
+    - service: switch.turn_on
+      entity_id:
+        - switch.lampa_vardagsrum
+        - switch.vardagsrum_fonster_1
+        - switch.vardagsrum_fonster_2
+        - switch.vardagsrum_byra
+        - switch.smalampor
+
+all_lights_off:
+  sequence:
+    - service: light.turn_off
+    - service: switch.turn_off
+      entity_id:
+        - switch.lampa_vardagsrum
+        - switch.vardagsrum_fonster_1
+        - switch.vardagsrum_fonster_2
+        - switch.vardagsrum_byra
+        - switch.smalampor
+
+#turn_aircond_off:
+#  sequence:
+#    - service: switch.turn_on
+#      data:
+#        entity_id: switch.airconditioner_off
+#
+#set_aircond_heating_21:
+#  sequence:
+#    - service: switch.turn_on
+#      data:
+#        entity_id: switch.heating_21
+#
+#set_aircond_heating_22:
+#  sequence:
+#    - service: switch.turn_on
+#      data:
+#        entity_id: switch.heating_22
+#
+#set_aircond_heating_23:
+#  sequence:
+#    - service: switch.turn_on
+#      data:
+#        entity_id: switch.heating_23
+#
+#set_aircond_heating_24:
+#  sequence:
+#    - service: switch.turn_on
+#      data:
+#        entity_id: switch.heating_24
+#
+#set_aircond_heating_25:
+#  sequence:
+#    - service: switch.turn_on
+#      data:
+#        entity_id: switch.heating_25
+#
+#set_aircond_heating_26:
+#  sequence:
+#    - service: switch.turn_on
+#      data:
+#        entity_id: switch.heating_26
+#
+set_volume_up:
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.volume_up
+
+set_volume_down:
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.volume_down
+#
+#volume_up_xx:
+#  sequence:
+#    - service: broadlink.send_packet_192_168_2_43
+#      data:
+#        packet:
+#          - "JgCMAJWUEzcTNxM3ExITEhMSExITEhI4EjgSOBMSEhMSExITEhMSNxM3EzcTEhMSExITEhMSExITEhMSEzcTNxM3EzcTNxMABgiWlBI4EjgSOBISExITEhMSExITNxM3EzcTEhMSExITEhMSEjgSOBI4EhMSExITEhMSExITEhITEhM3EzcTNxM3EzcTAA0FAAAAAAAAAAAAAAAA"

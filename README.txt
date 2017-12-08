@@ -40,6 +40,9 @@ $ exit
 $ sudo systemctl start home-assistant@homeassistant.service
 
 
+Tellduslive
+--------------------------------------------------------------------------------
+pip3 install requests==2.14.2
 
 Remote Access with TLS/SSL via Let's Encrypt
 --------------------------------------------------------------------------------
