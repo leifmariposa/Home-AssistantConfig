@@ -34,6 +34,8 @@ sensors_view:
   icon: mdi:oil-temperature
   entities:
     - group.sensors
+    - group.indoor_temperature_graph
+    - group.outdoor_temperature_graph
 
 weather_view:
   view: yes
@@ -104,6 +106,7 @@ aircontitioner_view:
   entities:
 #    - group.airconditioner
     - group.volume
+    - group.test
 
 misc_view:
   view: yes
@@ -251,9 +254,20 @@ sensors:
     - sensor.kok_humidity
     - sensor.kok_temperature_2
     - sensor.vardagsrum_temperature
+    - sensor.vardagsrum_temperature_2
     - sensor.vardagsrum_humidity
     - sensor.ute_temperature
     - alarm_control_panel.mostigen1_alarm
+
+indoor_temperature_graph:
+  name: Temperature graph
+  entities:
+    - history_graph.indoor_temperature
+
+outdoor_temperature_graph:
+  name: Temperature graph
+  entities:
+    - history_graph.outdoor_temperature
 
 #weather:
 #  name: Weather
@@ -326,3 +340,11 @@ volume:
   entities:
     - script.set_volume_up
     - script.set_volume_down
+
+test:
+  name: Temperature test
+  control: hidden
+  entities:
+    - input_number.set_temperature
+    - script.increase_temperature
+    - script.decrease_temperature

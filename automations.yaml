@@ -88,4 +88,44 @@
         entity_id: light.lamp_right_of_tv
         color_temp: '{{ states.input_number.light_color.state | int }}'
 
-
+# This automation script runs when the value of input_number set_temperature has changed.
+- id: Set temperature changed
+  alias: Set temperature changed
+  trigger:
+    - platform: state
+      entity_id: input_number.set_temperature
+  action:
+    - service: notify.gmail
+      data_template:
+        title: 'New temperature'
+#        message: 'The temperature is now set to 18'
+        message: >
+          {% if states.input_number.set_temperature.state | int == 18 %}
+            'The temperature is now set to 18'
+          {% elif states.input_number.set_temperature.state | int == 19 %}
+            'The temperature is now set to 19'
+          {% elif states.input_number.set_temperature.state | int == 20 %}
+            'The temperature is now set to 20'
+          {% elif states.input_number.set_temperature.state | int == 21 %}
+            'The temperature is now set to 21'
+          {% elif states.input_number.set_temperature.state | int == 22 %}
+            'The temperature is now set to 22'
+          {% elif states.input_number.set_temperature.state | int == 23 %}
+            'The temperature is now set to 23'
+          {% elif states.input_number.set_temperature.state | int == 24 %}
+            'The temperature is now set to 24'
+          {% elif states.input_number.set_temperature.state | int == 25 %}
+            'The temperature is now set to 25'
+          {% elif states.input_number.set_temperature.state | int == 26 %}
+            'The temperature is now set to 26'
+          {% elif states.input_number.set_temperature.state | int == 27 %}
+            'The temperature is now set to 27'
+          {% elif states.input_number.set_temperature.state | int == 28 %}
+            'The temperature is now set to 28'
+          {% elif states.input_number.set_temperature.state | int == 29 %}
+            'The temperature is now set to 29'
+          {% elif states.input_number.set_temperature.state | int == 30 %}
+            'The temperature is now set to 30'
+          {% else %}
+            'The temperature is unknown'
+          {% endif %}

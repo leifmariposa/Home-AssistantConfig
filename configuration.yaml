@@ -171,6 +171,12 @@ input_number:
     min: 0
     max: 59
 
+  set_temperature:
+    name: Temperature setpoint
+    icon: mdi:temperature-celcius
+    min: 18
+    max: 30
+
 switch:
   - platform: broadlink
 #    host: 192.168.2.43
@@ -217,3 +223,18 @@ switch:
 #        command_off: 'JgCMAJWVEjgSNxM3ExITEhMSExITEhM3EzcTNxMSExITEhMSEhMTNxM3EhMSOBITEhMSEhMSExITEhM3ExITNxM3EzcTNxMABgmVlBM3EzcTNxMSExISExMSEhMSOBI4EjgSExISExITEhMSEzcTNxMSEzcTEhMSExITEhMSExITNxMSEzcSOBI4EjgTAA0FAAAAAAAAAAAAAAAA='
 
 #        command_twentyfive: 'JgDWAH47EA8QLhAPDy4RDxAuEA8QLhAPDy4QDxAuEC8PDxEtEA8QLhAuEC0QLhAPEBAQLhAtEA8QDxAPEA8QLhAPEA8PDxEPEA8QDxAuEA8PDxEOEA8QLhAPEA8QDxAuEC4QDxAPEC4QDw8PEA8QDxAvEA8QDxAOES0QLhAPEC4PEBAOEA8QEBAPEA8QLhAPDw8QDxAPEA8QDxAPEA8QDxEOEA8QLhAPEA8QLhAPDw8QDxAPEA8QDxEPEC0QDxAuEC4QLhAtEC8QDxAPEA8QLRAPEC4QLhAADQUAAA=='
+
+
+history_graph:
+  gr1:
+    name: Indoor temperature
+    entities:
+      - sensor.vardagsrum_temperature_2
+      - sensor.set_temperature
+#      - input_number.set_temperature
+    hours_to_show: 168
+  gr2:
+    name: Outdoor temperature
+    entities:
+      - sensor.ute_temperature
+    hours_to_show: 168

@@ -40,6 +40,20 @@ all_lights_off:
         - switch.vardagsrum_byra
         - switch.smalampor
 
+increase_temperature:
+  sequence:
+    - service: input_number.set_value
+      data_template:
+        entity_id: input_number.set_temperature
+        value: '{{ (states.input_number.set_temperature.state | int) + 1 }}'
+
+decrease_temperature:
+  sequence:
+    - service: input_number.set_value
+      data_template:
+        entity_id: input_number.set_temperature
+        value: '{{ (states.input_number.set_temperature.state | int) - 1 }}'
+
 #turn_aircond_off:
 #  sequence:
 #    - service: switch.turn_on

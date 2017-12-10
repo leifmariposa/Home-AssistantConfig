@@ -118,6 +118,12 @@
       friendly_name: 'Lights will turn off at'
       value_template: '{{ "%0.02d:%0.02d" | format(states("input_number.light_auto_off_hour") | int, states("input_number.light_auto_off_minutes") | int) }}'
 
+    set_temperature:
+#      entity_id:
+#      - input_number.set_temperature
+      unit_of_measurement: '°C'
+      value_template: >
+        {{((states('input_number.set_temperature'))+ 32)|round(1)}}
 #- platform: glances
 #  host: 127.0.0.1
 #  resources:
@@ -151,3 +157,4 @@
   unit_of_measurement: days
   scan_interval: 10800
   command: "ssl-cert-check -b -c /etc/letsencrypt/live/leifmariposa.asuscomm.com/cert.pem | awk '{ print $NF }'"
+
