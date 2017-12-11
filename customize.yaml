@@ -4,6 +4,7 @@ sensor.yw_today_current:
   friendly_name: Current
 sensor.yw_today_temperature:
   friendly_name: Temperature
+
 sensor.yw_day1_condition:
   friendly_name: Condition
 sensor.yw_day1_temperature_min:
@@ -22,6 +23,7 @@ sensor.yw_day3_temperature_min:
   friendly_name: Min temperature
 sensor.yw_day3_temperature_max:
   friendly_name: Max temperature
+
 sensor.dark_sky_summary:
   friendly_name: Summary
 sensor.dark_sky_apparent_temperature:
@@ -72,9 +74,13 @@ sensor.dark_sky_temperature:
   friendly_name: Temperature
 sensor.dark_sky_wind_bearing:
   friendly_name: Wind Bearing
+
 sensor.set_temperature:
-  friendly_name: Set temperature
+  friendly_name: Setpoint
+
 switch.airconditioner: {}
+
+
 script.reload_core:
   friendly_name: Reload Core
 script.reload_automation:
@@ -85,7 +91,12 @@ script.reload_themes:
   friendly_name: Reload Themes
 script.restart:
   friendly_name: Restart
+
 script.all_lights_on:
   friendly_name: Turn on all lights
 script.all_lights_off:
   friendly_name: Turn off all lights
+script.increase_temperature:
+  friendly_name: Increase 1 °C
+script.decrease_temperature:
+  friendly_name: Decrease 1 °C

@@ -22,12 +22,12 @@ lights_view:
     - group.livingroom_lights3
     - group.livingroom_lights_timer
 
-people_view:
-  view: yes
-#  icon: mdi:television-classic
-  icon: mdi:account-multiple
-  entities:
-    - group.whos_home
+#people_view:
+#  view: yes
+##  icon: mdi:television-classic
+#  icon: mdi:account-multiple
+#  entities:
+#    - group.whos_home
 
 sensors_view:
   view: yes
@@ -36,6 +36,7 @@ sensors_view:
     - group.sensors
     - group.indoor_temperature_graph
     - group.outdoor_temperature_graph
+    - group.heating
 
 weather_view:
   view: yes
@@ -45,6 +46,11 @@ weather_view:
     - group.weather_day1
     - group.weather_day2
     - group.weather_day3
+    - sun.sun
+    - group.weather
+    - group.sun
+    - group.moon
+    - group.clouds
 
 weather_today:
   name: Today
@@ -94,26 +100,27 @@ weather_day3:
 #    - group.dark_sky_precipitation
 #    - group.dark_sky_misc
 
-system_monitor_view:
-  view: yes
-  icon: mdi:speedometer
-  entities:
-    - group.system_monitor
+#system_monitor_view:
+#  view: yes
+#  icon: mdi:speedometer
+#  entities:
+#    - group.system_monitor
 
-aircontitioner_view:
-  view: yes
-  icon: mdi:fan
-  entities:
-#    - group.airconditioner
-    - group.volume
-    - group.test
+#aircontitioner_view:
+#  view: yes
+#  icon: mdi:fan
+#  entities:
+##    - group.airconditioner
+#    - group.volume
 
 misc_view:
   view: yes
   icon: mdi:all-inclusive
   entities:
-    - group.misc
     - group.scripts
+    - group.system_monitor
+    - group.ssl_cert_expiry
+    - group.volume
 
 
 #
@@ -130,7 +137,7 @@ summary:
     - sensor.ute_temperature
     - alarm_control_panel.mostigen1_alarm
 
-misc:
+ssl_cert_expiry:
   name: SSL Cert Expiry
   entities:
     - sensor.ssl_cert_expiry
@@ -341,10 +348,12 @@ volume:
     - script.set_volume_up
     - script.set_volume_down
 
-test:
-  name: Temperature test
+heating:
+  name: Heating
   control: hidden
   entities:
-    - input_number.set_temperature
+    - sensor.set_temperature
+#    - input_number.set_temperature
     - script.increase_temperature
     - script.decrease_temperature
+    - input_boolean.heating_auto

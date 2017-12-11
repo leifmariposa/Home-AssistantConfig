@@ -131,6 +131,11 @@ input_boolean:
     initial: on
     icon: mdi:flash-off
 
+  heating_auto:
+    name: Automatic
+    initial: on
+    icon: mdi:autorenew
+
 input_number:
   light_brightness:
     name: Brightness

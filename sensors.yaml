@@ -123,7 +123,7 @@
 #      - input_number.set_temperature
       unit_of_measurement: '°C'
       value_template: >
-        {{((states('input_number.set_temperature'))+ 32)|round(1)}}
+        {{((states('input_number.set_temperature')))|round(1)}}
 #- platform: glances
 #  host: 127.0.0.1
 #  resources:
