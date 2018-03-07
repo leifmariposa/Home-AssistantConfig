@@ -9,16 +9,16 @@
     data:
       name: dark_theme
 
-- id: 'New HA version'
-  alias: New HA version
-  trigger:
-    - platform: state
-      entity_id: updater.updater
-  action:
-    service: notify.gmail
-    data:
-      title: 'New HA version available'
-      message: 'There is a new Home Assistant {{ states.updater.updater.state }} release available.'
+#- id: 'New HA version'
+#  alias: New HA version
+#  trigger:
+#    - platform: state
+#      entity_id: updater.updater
+#  action:
+#    service: notify.gmail
+#    data:
+#      title: 'New HA version available'
+#      message: 'There is a new Home Assistant {{ states.updater.updater.state }} release available.'
 
 - id: 'Auto Renew SSL Cert'
   alias: 'Auto Renew SSL Cert'
@@ -42,8 +42,8 @@
   action:
     service: light.turn_on
 
-- id: lights_auto_on
-  alias: lights_auto_on
+- id: lights_auto_off
+  alias: lights_auto_off
   trigger:
     platform: time
     minutes: '/1'
@@ -95,37 +95,98 @@
     - platform: state
       entity_id: input_number.set_temperature
   action:
-    - service: notify.gmail
+    - service: switch.turn_on
       data_template:
-        title: 'New temperature'
-#        message: 'The temperature is now set to 18'
-        message: >
+        entity_id: >
           {% if states.input_number.set_temperature.state | int == 18 %}
-            'The temperature is now set to 18'
+            switch.heating_18
           {% elif states.input_number.set_temperature.state | int == 19 %}
-            'The temperature is now set to 19'
+            switch.heating_19
           {% elif states.input_number.set_temperature.state | int == 20 %}
-            'The temperature is now set to 20'
+            switch.heating_20
           {% elif states.input_number.set_temperature.state | int == 21 %}
-            'The temperature is now set to 21'
+            switch.heating_21
           {% elif states.input_number.set_temperature.state | int == 22 %}
-            'The temperature is now set to 22'
+            switch.heating_22
           {% elif states.input_number.set_temperature.state | int == 23 %}
-            'The temperature is now set to 23'
+            switch.heating_23
           {% elif states.input_number.set_temperature.state | int == 24 %}
-            'The temperature is now set to 24'
+            switch.heating_24
           {% elif states.input_number.set_temperature.state | int == 25 %}
-            'The temperature is now set to 25'
+            switch.heating_25
           {% elif states.input_number.set_temperature.state | int == 26 %}
-            'The temperature is now set to 26'
+            switch.heating_26
           {% elif states.input_number.set_temperature.state | int == 27 %}
-            'The temperature is now set to 27'
+            switch.heating_27
           {% elif states.input_number.set_temperature.state | int == 28 %}
-            'The temperature is now set to 28'
-          {% elif states.input_number.set_temperature.state | int == 29 %}
-            'The temperature is now set to 29'
-          {% elif states.input_number.set_temperature.state | int == 30 %}
-            'The temperature is now set to 30'
+            switch.heating_28
           {% else %}
             'The temperature is unknown'
+          {% endif %}
+#    - service: notify.gmail
+#      data_template:
+#        title: 'New temp {{ states.input_number.set_temperature.state | int }}'
+#        message: >
+#          {% if states.input_number.set_temperature.state | int == 18 %}
+#            'The temperature is now set to 18'
+#          {% elif states.input_number.set_temperature.state | int == 19 %}
+#            'The temperature is now set to 19'
+#          {% elif states.input_number.set_temperature.state | int == 20 %}
+#            'The temperature is now set to 20'
+#          {% elif states.input_number.set_temperature.state | int == 21 %}
+#            'The temperature is now set to 21'
+#          {% elif states.input_number.set_temperature.state | int == 22 %}
+#            'The temperature is now set to 22'
+#          {% elif states.input_number.set_temperature.state | int == 23 %}
+#            'The temperature is now set to 23'
+#          {% elif states.input_number.set_temperature.state | int == 24 %}
+#            'The temperature is now set to 24'
+#          {% elif states.input_number.set_temperature.state | int == 25 %}
+#            'The temperature is now set to 25'
+#          {% elif states.input_number.set_temperature.state | int == 26 %}
+#            'The temperature is now set to 26'
+#          {% elif states.input_number.set_temperature.state | int == 27 %}
+#            'The temperature is now set to 27'
+#          {% elif states.input_number.set_temperature.state | int == 28 %}
+#            'The temperature is now set to 28'
+#          {% else %}
+#            'The temperature is unknown'
+#          {% endif %}
+
+- id: heating_automation
+  alias: heating_automation
+  trigger:
+    platform: time
+    minutes: '/5'
+    seconds: 0
+  condition:
+    - condition: state
+      entity_id: input_boolean.heating_auto
+      state: 'on'
+  action:
+    - service: input_number.set_value
+      data_template:
+        entity_id: input_number.set_temperature
+        value: >
+          {% if states.sensor.vardagsrumne_temperature.state | float < 19.5 %}
+            {%- set n = 26|float -%}
+            {{ n }}
+          {% elif states.sensor.vardagsrumne_temperature.state | float < 20.0 %}
+            {%- set n = 25|float -%}
+            {{ n }}
+          {% elif states.sensor.vardagsrumne_temperature.state | float < 20.5 %}
+            {%- set n = 24|float -%}
+            {{ n }}
+          {% elif states.sensor.vardagsrumne_temperature.state | float < 21.0 %}
+            {%- set n = 23|float -%}
+            {{ n }}
+          {% elif states.sensor.vardagsrumne_temperature.state | float < 21.5 %}
+            {%- set n = 22|float -%}
+            {{ n }}
+          {% elif states.sensor.vardagsrumne_temperature.state | float < 22.0 %}
+            {%- set n = 21|float -%}
+            {{ n }}
+          {% else %}
+            {%- set n = 21|float -%}
+            {{ n }}
           {% endif %}

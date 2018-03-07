@@ -60,57 +60,81 @@ decrease_temperature:
 #      data:
 #        entity_id: switch.airconditioner_off
 #
-#set_aircond_heating_21:
-#  sequence:
-#    - service: switch.turn_on
-#      data:
-#        entity_id: switch.heating_21
-#
-#set_aircond_heating_22:
-#  sequence:
-#    - service: switch.turn_on
-#      data:
-#        entity_id: switch.heating_22
-#
-#set_aircond_heating_23:
-#  sequence:
-#    - service: switch.turn_on
-#      data:
-#        entity_id: switch.heating_23
-#
-#set_aircond_heating_24:
-#  sequence:
-#    - service: switch.turn_on
-#      data:
-#        entity_id: switch.heating_24
-#
-#set_aircond_heating_25:
-#  sequence:
-#    - service: switch.turn_on
-#      data:
-#        entity_id: switch.heating_25
-#
-#set_aircond_heating_26:
-#  sequence:
-#    - service: switch.turn_on
-#      data:
-#        entity_id: switch.heating_26
-#
-set_volume_up:
+set_aircond_heating_18:
   sequence:
     - service: switch.turn_on
       data:
-        entity_id: switch.volume_up
+        entity_id: switch.heating_18
 
-set_volume_down:
+set_aircond_heating_19:
   sequence:
     - service: switch.turn_on
       data:
-        entity_id: switch.volume_down
-#
-#volume_up_xx:
+        entity_id: switch.heating_19
+
+set_aircond_heating_20:
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.heating_20
+
+set_aircond_heating_21:
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.heating_21
+
+set_aircond_heating_22:
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.heating_22
+
+set_aircond_heating_23:
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.heating_23
+
+set_aircond_heating_24:
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.heating_24
+
+set_aircond_heating_25:
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.heating_25
+
+set_aircond_heating_26:
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.heating_26
+
+set_aircond_heating_27:
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.heating_27
+
+set_aircond_heating_28:
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.heating_28
+
+#set_volume_up:
 #  sequence:
-#    - service: broadlink.send_packet_192_168_2_43
+#    - service: switch.turn_on
 #      data:
-#        packet:
-#          - "JgCMAJWUEzcTNxM3ExITEhMSExITEhI4EjgSOBMSEhMSExITEhMSNxM3EzcTEhMSExITEhMSExITEhMSEzcTNxM3EzcTNxMABgiWlBI4EjgSOBISExITEhMSExITNxM3EzcTEhMSExITEhMSEjgSOBI4EhMSExITEhMSExITEhITEhM3EzcTNxM3EzcTAA0FAAAAAAAAAAAAAAAA"
+#        entity_id: switch.volume_up
+#
+#set_volume_down:
+#  sequence:
+#    - service: switch.turn_on
+#      data:
+#        entity_id: switch.volume_down
+#

@@ -76,7 +76,9 @@ sensor.dark_sky_wind_bearing:
   friendly_name: Wind Bearing
 
 sensor.set_temperature:
-  friendly_name: Setpoint
+  friendly_name: Heater setpoint
+sensor.vardagsrumne_temperature:
+  friendly_name: Livingroom temperature
 
 switch.airconditioner: {}
 
@@ -100,3 +102,12 @@ script.increase_temperature:
   friendly_name: Increase 1 °C
 script.decrease_temperature:
   friendly_name: Decrease 1 °C
+
+group.lights_view:
+  friendly_name: Lights
+group.climate_view:
+  friendly_name: Climate
+group.weather_view:
+  friendly_name: Weather
+group.misc_view:
+  friendly_name: Misc
