@@ -143,8 +143,11 @@ shell_command:
   action:
     service: shell_command.renew_ssl
 
-
-
+Manually renew certificate
+--------------------------------------------------------------------------------
+login as pi user
+cd /home/homeassistant/certbot
+./certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01
 
 
 Glances
