@@ -10,6 +10,7 @@ default_view:
     - group.summary
     - group.control
     - group.whos_home
+    - group.all_vacuum_cleaners
 
 lights_view:
   view: yes
@@ -29,6 +30,7 @@ climate_view:
     - group.indoor_temperature_graph
     - group.indoor_humidity_graph
     - group.outdoor_temperature_graph
+    - group.sensor1_graph
     - group.heating
 
 weather_view:
@@ -45,6 +47,15 @@ weather_view:
     - group.moon
     - group.clouds
 
+vacuum_view:
+  view: yes
+  icon: mdi:robot-vacuum-variant
+  entities:
+    - group.vacuum
+    - vacuum.alice
+    - switch.alice_schedule
+    - camera.alice_cleaning_map
+
 misc_view:
   view: yes
   icon: mdi:all-inclusive
@@ -58,6 +69,13 @@ misc_view:
 #
 # Groups
 #
+
+vacuum:
+  name: Vaccum
+  entities:
+    - sensor.alice_battery_level
+    - sensor.alice_status
+    - sensor.alice_last_cleaned
 
 summary:
   name: Summary
@@ -178,6 +196,7 @@ sensors:
     - sensor.vardagsrum_temperature
     - sensor.vardagsrumne_temperature
     - sensor.vardagsrum_humidity
+    - sensor.sensor1
     - sensor.ute_temperature
     - alarm_control_panel.mostigen1_alarm
 
@@ -200,6 +219,11 @@ outdoor_temperature_graph:
   name: Temperature graph
   entities:
     - history_graph.outdoor_temperature
+
+sensor1_graph:
+  name: Sensor1 graph
+  entities:
+    - history_graph.sensor1
 
 heating:
   name: Heating

@@ -118,6 +118,19 @@
       friendly_name: 'Lights will turn off at'
       value_template: '{{ "%0.02d:%0.02d" | format(states("input_number.light_auto_off_hour") | int, states("input_number.light_auto_off_minutes") | int) }}'
 
+    alice_battery_level:
+      friendly_name: 'Battery level'
+      value_template: '{{ states.vacuum.alice.attributes.battery_level }}'
+      unit_of_measurement: '%'
+
+    alice_status:
+      friendly_name: 'Status'
+      value_template: '{{ states.vacuum.alice.attributes.status }}'
+
+    alice_last_cleaned:
+      friendly_name: 'Last cleaned'
+      value_template: '{{ states.vacuum.alice.attributes.clean_stop }}'
+
     set_temperature:
 #      entity_id:
 #      - input_number.set_temperature
@@ -158,3 +171,13 @@
   scan_interval: 10800
   command: "ssl-cert-check -b -c /etc/letsencrypt/live/leifmariposa.asuscomm.com/cert.pem | awk '{ print $NF }'"
 
+- platform: mqtt
+  name: Sensor1
+  state_topic: "/Sensor1/Temperature"
+  unit_of_measurement: '°C'
+  #value_template: '{{ payload|float }}'
+
+#  value_template: "{{ value_json.temperature }}"
+#  json_attributes:
+#    - temperature
+#    - battery_voltage

@@ -24,6 +24,9 @@ frontend:
 # Enables configuration UI
 config:
 
+mqtt:
+  broker: 127.0.0.1
+
 http:
   api_password: !secret api_password
   ssl_certificate: /etc/letsencrypt/live/leifmariposa.asuscomm.com/fullchain.pem
@@ -90,16 +93,20 @@ verisure:
   password: !secret verisure_password
 
 device_tracker:
-  platform: asuswrt
-  host: 192.168.2.1
-  username: admin
-  password: !secret asuswrt_password
-  protocol: telnet
-  interval_seconds: 120
-  track_new_devices: no
+  - platform: asuswrt
+    host: 192.168.2.1
+    username: admin
+    password: !secret asuswrt_password
+    protocol: telnet
+    interval_seconds: 120
+    track_new_devices: no
 
 tradfri:
   host: 192.168.2.96
+
+neato:
+  username: jonfpersson@gmail.com
+  password: mostigen1
 
 tellduslive:
 #  public_key: FEHUVEW84RAFR5SP22RABURUPHAFRUNU
@@ -258,5 +265,10 @@ history_graph:
     entities:
       - sensor.vardagsrum_humidity
     hours_to_show: 168
+  gr5:
+    name: Sensor1
+    entities:
+      - sensor.sensor1
+    hours_to_show: 24
 
 python_script:
