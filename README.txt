@@ -192,3 +192,10 @@ sensors.yaml
     - 'process_thread'
     - 'process_sleeping'
     - 'cpu_temp'
+
+
+
+
+Grafana och InfluxDB
+====================
+https://snillevilla.se/snygg-statistik-i-home-assistant-med-grafana-och-influxdb/

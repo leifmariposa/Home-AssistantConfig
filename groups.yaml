@@ -10,7 +10,8 @@ default_view:
     - group.summary
     - group.control
     - group.whos_home
-    - group.all_vacuum_cleaners
+    - media_player.living_room_speak
+    - media_player.living_room_tv
 
 lights_view:
   view: yes
@@ -53,7 +54,6 @@ vacuum_view:
   entities:
     - group.vacuum
     - vacuum.alice
-    - switch.alice_schedule
     - camera.alice_cleaning_map
 
 misc_view:
@@ -65,10 +65,23 @@ misc_view:
     - group.ssl_cert_expiry
     - group.volume
 
+web_view:
+  view: yes
+  icon: mdi:web
+  entities:
+    - group.web
+
 
 #
 # Groups
 #
+
+web:
+  name: Web links
+  entities:
+    - weblink.grafana
+    - weblink.automatiserarse_guide__home_assistant
+    - weblink.automatiserarse_guide__raspberry_pi
 
 vacuum:
   name: Vaccum

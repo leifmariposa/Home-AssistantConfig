@@ -24,8 +24,32 @@ frontend:
 # Enables configuration UI
 config:
 
+# Grafana in Home Assistant
+panel_iframe:
+  grafana:
+    title: 'Statistik'
+    icon: mdi:elevation-rise
+    #url: 'https://leifmariposa.asuscomm.com:3000'
+    url: 'http://192.168.2.108:3000'
+
+# Example configuration.yaml entry
+weblink:
+  entities:
+    - name: Automatiserar.se Guide - Home Assistant
+      url: https://www.automatiserar.se/guide-home-assistant/
+    - name: Automatiserar.se Guide - Raspberry Pi
+      url: https://www.automatiserar.se/guide-raspberry-pi/
+    - name: Grafana
+      url: http://leifmariposa.asuscomm.com:3000/d/w8gU1ezgk/main?orgId=1&from=now-24h&to=now
+
+media_player:
+  - platform: cast
+
 mqtt:
   broker: 127.0.0.1
+
+influxdb:
+  host: 127.0.0.1
 
 http:
   api_password: !secret api_password
